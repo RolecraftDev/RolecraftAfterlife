@@ -8,6 +8,8 @@ public class RolecraftAfterlife extends JavaPlugin {
     
     private RolecraftCore corePlugin;
     
+    private PlayerDataAccessor accessor;
+    
     @Override
     public void onLoad() {
         
@@ -15,11 +17,19 @@ public class RolecraftAfterlife extends JavaPlugin {
     
     @Override
     public void onEnable () {
-        
+        accessor = new PlayerDataAccessor(this);
     }
     
     @Override
     public void onDisable () {
         
+    }
+    
+    public PlayerDataAccessor getAcessor() {
+        return accessor;
+    }
+    
+    public RolecraftCore getCore () {
+        return corePlugin;
     }
 }
