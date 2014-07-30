@@ -1,0 +1,15 @@
+name: RolecraftAfterlife
+version: 0.0.1-SNAPSHOT
+
+description: Afterlife roleplay for Bukkit
+authors: [PandazNWafflez, mythbusterma, TraksAG]
+
+main: com.github.rolecraftdev.afterlife.RolecraftAfterlife
+depend: [RolecraftCore]
+
+commands:
+  damn:
+    description: Immediately kills a player and sends them to hell
+
+permissions:
+
