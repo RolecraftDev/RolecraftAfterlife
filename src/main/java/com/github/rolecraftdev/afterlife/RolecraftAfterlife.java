@@ -25,7 +25,7 @@ public class RolecraftAfterlife extends JavaPlugin {
         
     }
     
-    public PlayerDataAccessor getAcessor() {
+    public PlayerDataAccessor getAccessor() {
         return accessor;
     }
     
