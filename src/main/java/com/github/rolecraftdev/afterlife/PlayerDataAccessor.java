@@ -41,7 +41,7 @@ public class PlayerDataAccessor {
     }
     
     public void deductKarma (final Player ply, final float amount) {
-        plugin.getCore().getDataManager().getPlayerData(ply.getUniqueId()).deductKarma(amount);
+        plugin.getCore().getDataManager().getPlayerData(ply.getUniqueId()).subtractKarma(amount);
     }
 
 }

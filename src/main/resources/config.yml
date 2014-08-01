@@ -1,3 +1,7 @@
 
 value:
   gift: 20
+  
+giftcooldown: 60
+
+

@@ -26,6 +26,7 @@
  */
 package com.github.rolecraftdev.afterlife.listener;
 
+import java.util.HashMap;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -44,22 +45,32 @@ public class PickupListener implements Listener {
     
     private RolecraftAfterlife plugin;
     
+    private HashMap<UUID,Long> lastGift;
+    
     public PickupListener (RolecraftAfterlife plugin ) {
         this.plugin = plugin;
+        lastGift = new HashMap<UUID,Long>();
     }
     
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPickup(PlayerPickupItemEvent event) {
-        
-        // TODO: add cooldown
         
         if(event.getItem().hasMetadata("dropper")) {
             Player player = Bukkit.getServer().getPlayer(
                     UUID.fromString(event.getItem().getMetadata("dropper")
                             .get(0).asString()));
             if(player != null) {
-                plugin.getAccessor().addKarma(player,
-                        (float) plugin.getConfig().getDouble("value.gift"));
+                if(lastGift.get(UUID.fromString(event.getItem().getMetadata("dropper") 
+                            .get(0).asString())) + plugin.getConfig().getInt("giftcooldown")
+                            * 1000 < System.currentTimeMillis()) {
+                    plugin.getAccessor().addKarma(player,
+                            (float) plugin.getConfig().getDouble("value.gift"));
+                    player.sendMessage("You have given a gift to : " 
+                            + event.getPlayer().getName() + " and recivied some bonus Karma!");
+                    event.getPlayer().sendMessage(player.getName()+" has given you a gift!");
+                    lastGift.put(UUID.fromString(event.getItem().getMetadata("dropper") 
+                            .get(0).asString()), System.currentTimeMillis());
+                }
             }
         }
     }
